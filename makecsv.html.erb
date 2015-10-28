@@ -1,0 +1,26 @@
+<% class Death %>
+  <%= def import(deaths.csv.tempfile) %>
+    <% CSV.foreach(deaths.csv.tempfile, headers: true) do |r| %>
+      <%= self.create(year: r["year"], accidental_deaths_in_thousands: r["accidental_deaths_in_thousands"]) %>
+    <% end %>
+  <%  end %>
+<% end %>
+
+<% @deaths=Death.all %>
+
+<table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Accidental Deaths in Thousands</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @deaths.each do |d| %>
+        <tr>
+          <td><%= d.year %></td>
+          <td><%= d.accidental_deaths_in_thousands %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
