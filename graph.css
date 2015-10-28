@@ -1,0 +1,22 @@
+svg {
+  width: 1000px;
+  height: 500px;
+  border: 1px solid lightgrey;
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+}
+
+path {
+  stroke: black;
+  fill: none;
+}
+
+.tick {
+  stroke: black;
+}
+
+circle {
+  stroke: darkblue;
+  fill: lightblue;
+}

@@ -78,4 +78,68 @@ scale(2007)
 => ~575
 
 
+
+How to link to and open the CSV file in the .js file!
+This is like a loop but using CSV hashes:
+d3.csv("old_discoveries.csv", function(csv_data) {
+  data.forEach(function(point) {
+    g.append("circle")
+    .attr("cx", x(point.year)) Year here!
+    .attr("cy", y(point.important_discoveries)) Important discoveries here!
+    .attr("r", 5);
+  })
+};
+
+The better way with joins:
+d3.csv("old_discoveries.csv", function(csv_data) {
+  g.selectAll("circle") even though there are no circles!
+    .data(csv_data) data is a data join, you pass it a data set
+    .enter().append("circle")
+      .attr("cx", function(point) {return x(point.year)} )
+      .attr("cy", function(point) {return y(point.important_discoveries)} )
+      .attr("r", 5);
+});
+
+Make a button on the HTML page to switch between CSV data sets:
+<div>
+  <button id="update-data">Display new data</button>
+</div>
+
+To move, delete, and add new data point circles:
+d3.select("#update-data").on("click", function(){
+  d3.csv("new_discoveries.csv", function(csv_data) { Change from old_discoveries to new_discoveries
+    var join = g.selectAll("circle")
+      .data(csv_data);
+
+      join.attr("cx", function(point) {return x(point.year)})
+        .attr("cy", function(point) {return y(point.important_discoveries)});
+
+      join.enter().append("circle")
+        .attr("cx", function(point) {return x(point.year)})
+        .attr("cy", function(point) {return y(point.important_discoveries)})
+        .attr("r", 5);
+
+      join.exit().remove();
+});
+
+
+
+
+
+
+Type in console to change ports:
+ruby -run -ehttpd .-p8000
+Then go to localhost:8000 and it will show the file tree.
+
+
+
+
+
+
+
+
+
+
+
+
 Atom plea
